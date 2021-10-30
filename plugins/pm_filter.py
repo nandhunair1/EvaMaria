@@ -105,9 +105,6 @@ async def next_page(bot, query):
                 parse_mode="markdown"
             )
             return
-    
-        if not btn:
-            return
 
     if 0 < offset <= 10:
         off_set = 0
