@@ -28,7 +28,7 @@ async def start(client, message):
             InlineKeyboardButton('😊 About', callback_data='about')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
-        await message.reply_photo(
+        await message.reply_video(
             video=random.choice(PICS),
             caption=script.START_TXT.format(message.from_user.mention),
             reply_markup=reply_markup,
