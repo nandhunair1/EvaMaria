@@ -89,9 +89,27 @@ async def next_page(bot, query):
     if files:
         for file in files:
             file_id = file.file_id
-            btn.append(
-                [InlineKeyboardButton(text=f"{file.file_name}", callback_data=f'files#{file_id}'), InlineKeyboardButton(text=f"{get_size(file.file_size)}", callback_data=f'files_#{file_id}')]
+            filename = f"🎬[{get_size(file.file_size)}]🎥{file.file_name}"
+                btn.append(
+                    [InlineKeyboardButton(text=f"{filename}", url=f"https://telegram.dog/{nyva}?start=subinps_-_-_-_{file_id}")]
                 )
+    else:
+            await message.reply(quote=True,
+            text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**""",
+            reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url="https://www.google.com")
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
+    
+        if not btn:
+            return
+
     if 0 < offset <= 10:
         off_set = 0
     elif offset == 0:
@@ -100,16 +118,16 @@ async def next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"), InlineKeyboardButton(f"📃 Pages {round(int(offset)/10)+1} / {round(total/10)}", callback_data="pages")]
+            [InlineKeyboardButton("«««Back", callback_data=f"next_{req}_{key}_{off_set}"), InlineKeyboardButton(f"📃 Pages {round(int(offset)/10)+1} / {round(total/10)}", callback_data="pages")]
         )
     elif off_set is None:
-        btn.append([InlineKeyboardButton(f"🗓 {round(int(offset)/10)+1} / {round(total/10)}", callback_data="pages"), InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")])
+        btn.append([InlineKeyboardButton(f"🗓 {round(int(offset)/10)+1} / {round(total/10)}", callback_data="pages"), InlineKeyboardButton("𝙽𝚎𝚡𝚝»»»", callback_data=f"next_{req}_{key}_{n_offset}")])
     else:
         btn.append(
             [
-                InlineKeyboardButton("⏪ BACK", callback_data=f"next_{req}_{key}_{off_set}"),
+                InlineKeyboardButton("«««Back", callback_data=f"next_{req}_{key}_{off_set}"),
                 InlineKeyboardButton(f"🗓 {round(int(offset)/10)+1} / {round(total/10)}", callback_data="pages"),
-                InlineKeyboardButton("NEXT ⏩", callback_data=f"next_{req}_{key}_{n_offset}")
+                InlineKeyboardButton("𝙽𝚎𝚡𝚝»»»", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
         )
     try:
@@ -547,9 +565,9 @@ async def auto_filter(client, message):
             )
         imdb=await get_poster(search)
         if imdb and imdb.get('poster'):
-            await message.reply_photo(photo=imdb.get('poster'), caption=f"<b>Query :- {search}</b> \n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>🏷 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+            await message.reply_photo(photo=imdb.get('poster'), caption=f"<b>🎥Requested For:- {search}</b> \n\n<b>🏷 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
         elif imdb:
-            await message.reply_text(f"<b>Query :- {search}</b> \n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>🏷 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+            await message.reply_text(f"<b>🎥Requested For:- {search}</b> \n\n<b>🏷 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
         else:
             await message.reply_text(f"<b>Here is What I Found In My Database For Your Query {search} ‌‌‌‌‎ </b>", reply_markup=InlineKeyboardMarkup(btn))
         
