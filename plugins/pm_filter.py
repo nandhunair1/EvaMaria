@@ -356,7 +356,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                         InlineKeyboardButton("♻️ ⒼⓇⓄⓊⓅ ♻️", url="https://t.me/tvseriezzz")
                     ]
                     ]
-                
                 await query.answer()
                 await client.send_cached_media(
                     chat_id=query.from_user.id,
