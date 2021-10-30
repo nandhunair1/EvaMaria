@@ -16,7 +16,7 @@ class script(object):
 ✯ 𝙱𝚄𝙸𝙻𝙳 𝚂𝚃𝙰𝚃𝚄𝚂: v1.0.1 [ 𝙱𝙴𝚃𝙰 ]"""
     SOURCE_TXT = """<b>NOTE:</b>
 - Alan Walker is a open source bot. 
-- Support Group - https://t.me/tvseriezzz 
+- Support Group - <a href=https://t.me/tvseriezzz>All In One Group</a> 
 
 <b>Update Channel:</b>
 - <a href=https://t.me/tvseriezzz_update>All In One Update</a>"""
