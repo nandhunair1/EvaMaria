@@ -26,6 +26,8 @@ async def start(client, message):
             ],[
             InlineKeyboardButton('ℹ️ Help', callback_data='help'),
             InlineKeyboardButton('😊 About', callback_data='about')
+            ],[
+            InlineKeyboardButton('🔍 Search', switch_inline_query_current_chat='') 
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await message.reply_video(
