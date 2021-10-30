@@ -89,9 +89,8 @@ async def next_page(bot, query):
     if files:
         for file in files:
             file_id = file.file_id
-            filename = f"🎬[{get_size(file.file_size)}]🎥{file.file_name}"
-                btn.append(
-                    [InlineKeyboardButton(text=f"{filename}", callback_data=f'files#{file_id}')]
+            btn.append(
+                [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", callback_data=f'files_#{file_id}')]
                 )
     else:
             await message.reply(quote=True,
