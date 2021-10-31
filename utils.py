@@ -88,7 +88,9 @@ async def get_poster(query, bulk=False, id=False):
     else:
         date = "N/A"
     poster = movie.get('full-size cover url')
-    plot = movie.get('plot outline')
+    plot = movie.get('plot')
+    if plot and len(plot) > 0:
+        plot = plot[0]
     if plot and len(plot) > 800:
         plot = plot[0:800] + "..."
     return {
@@ -303,7 +305,7 @@ def humanbytes(size):
         return ""
     power = 2**10
     n = 0
-    Dic_powerN = {0: ' ', 1: 'Kb', 2: 'Mb', 3: 'Gb', 4: 'Tb'}
+    Dic_powerN = {0: ' ', 1: 'Ki', 2: 'Mi', 3: 'Gi', 4: 'Ti'}
     while size > power:
         size /= power
         n += 1
