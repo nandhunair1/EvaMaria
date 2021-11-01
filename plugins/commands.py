@@ -12,8 +12,24 @@ from utils import get_size, is_subscribed, temp
 
 logger = logging.getLogger(__name__)
 
-@Client.on_message(filters.private & filters.command("start"))
+@Client.on_message(filters.command("start"))
 async def start(client, message):
+    if message.chat.type in ['group', 'supergroup']:
+        buttons = [
+            [
+                InlineKeyboardButton("⭕️ 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 ⭕️", url="https://t.me/tvseriezzz_update")
+            ],
+            [
+                InlineKeyboardButton('ℹ️ Help', url=f"https://t.me/{temp.U_NAME}?start=help"),
+            ]
+            ]
+        reply_markup = InlineKeyboardMarkup(buttons)
+
+        if not await db.get_chat(message.chat.id):
+            total=await client.get_chat_members_count(message.chat.id)
+            await client.send_message(LOG_CHANNEL, script.LOG_TEXT_G.format(message.chat.title, message.chat.id, total, "Unknown"))       
+            await db.add_chat(message.chat.id, message.chat.title)
+        return await message.reply(script.START_TXT.format(message.from_user.mention if message.from_user else message.chat.title), reply_markup=reply_markup)
     if not await db.is_user_exist(message.from_user.id):
         await db.add_user(message.from_user.id, message.from_user.first_name)
         await client.send_message(LOG_CHANNEL, script.LOG_TEXT_P.format(message.from_user.id, message.from_user.mention))
@@ -36,8 +52,6 @@ async def start(client, message):
             reply_markup=reply_markup,
             parse_mode='html'
         )
-        if not await db.is_user_exist(message.from_user.id):
-            await db.add_user(message.from_user.id, message.from_user.first_name)
         return
     if AUTH_CHANNEL and not await is_subscribed(client, message):
         try:
@@ -81,8 +95,6 @@ async def start(client, message):
             reply_markup=reply_markup,
             parse_mode='html'
         )
-        if not await db.is_user_exist(message.from_user.id):
-            await db.add_user(message.from_user.id, message.from_user.first_name)
         return
     file_id = message.command[1]
     files = (await get_file_details(file_id))[0]
