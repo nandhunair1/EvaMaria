@@ -5,7 +5,7 @@ import ast
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, make_inactive
-from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS
+from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTTI_SHOW_OFF, IMDB
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -320,6 +320,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
                 return
+            elif P_TTTI_SHOW_OFF:
+                await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
+                return
             else:
                 await client.send_cached_media(
                     chat_id=query.from_user.id,
@@ -351,6 +354,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption=f_caption
         if f_caption is None:
             f_caption = f"{title}"
+        buttons = [
+            [
+                InlineKeyboardButton('♻️ ⒼⓇⓄⓊⓅ ♻️', url='https://t.me/tvseriezzz'),
+                InlineKeyboardButton('⭕️ 𝙲𝙷𝙰𝙽𝙽𝙴𝙻 ⭕️', url='https://t.me/tvseriezzz_update')
+            ]
+            ]
+
         await query.answer()
         await client.send_cached_media(
             chat_id=query.from_user.id,
@@ -380,7 +390,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "help":
         buttons = [[
-            InlineKeyboardButton('Manuel Filter', callback_data='manuelfilter'),
+            InlineKeyboardButton('Manual Filter', callback_data='manuelfilter'),
             InlineKeyboardButton('Auto Filter', callback_data='autofilter')
             ],[
             InlineKeyboardButton('Connection', callback_data='coct'),
@@ -562,7 +572,7 @@ async def auto_filter(client, message):
             btn.append(
                 [InlineKeyboardButton(text="⚜ 1/1 ⚜",callback_data="pages")]
             )
-        imdb=await get_poster(search)
+        imdb = await get_poster(search) if IMDB else None
         if imdb and imdb.get('poster'):
             await message.reply_photo(photo=imdb.get('poster'), caption=f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
         elif imdb:
