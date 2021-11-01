@@ -354,7 +354,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 f_caption=f_caption
         if f_caption is None:
             f_caption = f"{title}"
-
         await query.answer()
         await client.send_cached_media(
             chat_id=query.from_user.id,
