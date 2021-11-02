@@ -558,7 +558,7 @@ async def auto_filter(client, message):
             BUTTONS[key] = search
             req = message.from_user.id if message.from_user else 0
             btn.append(
-                [InlineKeyboardButton(text=f"⚜ 1/{round(int(total_results)/10)+1} ⚜",callback_data="pages"), InlineKeyboardButton(text="𝙽𝚎𝚡𝚝»»»",callback_data=f"next_{req}_{key}_{offset}")]
+                [InlineKeyboardButton(text=f"⚜ 1/{round(int(total_results)/10)} ⚜",callback_data="pages"), InlineKeyboardButton(text="𝙽𝚎𝚡𝚝»»»",callback_data=f"next_{req}_{key}_{offset}")]
             )
         else:
             btn.append(
