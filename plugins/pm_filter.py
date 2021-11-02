@@ -2,10 +2,12 @@
 import asyncio
 import re
 import ast
+
+from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, make_inactive
-from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTTI_SHOW_OFF, IMDB
+from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -320,7 +322,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             if AUTH_CHANNEL and not await is_subscribed(client, query):
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
                 return
-            elif P_TTTI_SHOW_OFF:
+            elif P_TTI_SHOW_OFF:
                 await query.answer(url=f"https://t.me/{temp.U_NAME}?start={file_id}")
                 return
             else:
@@ -377,7 +379,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
-            text=script.START_TXT.format(query.from_user.mention),
+            text=script.START_TXT.format(query.from_user.mention, temp.U_NAME, temp.B_NAME),
             reply_markup=reply_markup,
             parse_mode='html'
         )
@@ -567,6 +569,15 @@ async def auto_filter(client, message):
         imdb = await get_poster(search) if IMDB else None
         if imdb and imdb.get('poster'):
             await message.reply_photo(photo=imdb.get('poster'), caption=f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+            try:
+                await message.reply_photo(photo=imdb.get('poster'), caption=f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+            except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
+                pic = imdb.get('poster')
+                poster = pic.replace('.jpg', "._V1_UX360.jpg")
+                await message.reply_photo(photo=poster, caption=f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+            except Exception as e:
+                print(e)
+                await message.reply_text(f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
         elif imdb:
             await message.reply_text(f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
         else:
