@@ -103,15 +103,15 @@ async def next_page(bot, query):
         off_set = offset - 10
     if n_offset == 0:
         btn.append(
-            [InlineKeyboardButton("«««Back", callback_data=f"next_{req}_{key}_{off_set}"), InlineKeyboardButton(f"⚜ {round(int(offset)/10)+1} / {round(total/10)} ⚜", callback_data="pages")]
+            [InlineKeyboardButton("«««Back", callback_data=f"next_{req}_{key}_{off_set}"), InlineKeyboardButton(f"⚜ {round(int(offset)/10)+1} / {round(total/10)+1} ⚜", callback_data="pages")]
         )
     elif off_set is None:
-        btn.append([InlineKeyboardButton(f"⚜ {round(int(offset)/10)+1} / {round(total/10)} ⚜", callback_data="pages"), InlineKeyboardButton("𝙽𝚎𝚡𝚝»»»", callback_data=f"next_{req}_{key}_{n_offset}")])
+        btn.append([InlineKeyboardButton(f"⚜ {round(int(offset)/10)+1} / {round(total/10)+1} ⚜", callback_data="pages"), InlineKeyboardButton("𝙽𝚎𝚡𝚝»»»", callback_data=f"next_{req}_{key}_{n_offset}")])
     else:
         btn.append(
             [
                 InlineKeyboardButton("«««Back", callback_data=f"next_{req}_{key}_{off_set}"),
-                InlineKeyboardButton(f"⚜ {round(int(offset)/10)} / {round(total/10)+1} ⚜", callback_data="pages"),
+                InlineKeyboardButton(f"⚜ {round(int(offset)/10)+1} / {round(total/10)+1} ⚜", callback_data="pages"),
                 InlineKeyboardButton("𝙽𝚎𝚡𝚝»»»", callback_data=f"next_{req}_{key}_{n_offset}")
             ],
         )
@@ -305,10 +305,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     if query.data.startswith("file"):
         ident, file_id = query.data.split("#")
-        files_ = await get_file_details(file_id)
-        if not files_:
-            return await query.answer('No such file exist.')
-        files = files_[0]
+        files = (await get_file_details(file_id))[0]
         title = files.file_name
         size=get_size(files.file_size)
         f_caption=files.caption
@@ -347,10 +344,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer("I Like Your Smartness, But Don't Be Oversmart 😒",show_alert=True)
             return
         ident, file_id = query.data.split("#")
-        files_ = await get_file_details(file_id)
-        if not files_:
-            return await query.answer('No such file exist.')
-        files = files_[0]
+        files = (await get_file_details(file_id))[0]
         title = files.file_name
         size=get_size(files.file_size)
         f_caption=files.caption
@@ -537,7 +531,7 @@ async def auto_filter(client, message):
     if 2 < len(message.text) < 100:    
         btn = []
         search = message.text
-        files, offset, total_results = await get_search_results(search.lower(), offset=0, filter=True)
+        files, offset, total_results = await get_search_results(search.lower(), offset=0)
         if files:
             for file in files:
                 file_id = file.file_id
@@ -566,7 +560,7 @@ async def auto_filter(client, message):
             BUTTONS[key] = search
             req = message.from_user.id if message.from_user else 0
             btn.append(
-                [InlineKeyboardButton(text=f"⚜ 1/{round(int(total_results)/10)} ⚜",callback_data="pages"), InlineKeyboardButton(text="𝙽𝚎𝚡𝚝»»»",callback_data=f"next_{req}_{key}_{offset}")]
+                [InlineKeyboardButton(text=f"⚜ 1/{round(int(total_results)/10)+1} ⚜",callback_data="pages"), InlineKeyboardButton(text="𝙽𝚎𝚡𝚝»»»",callback_data=f"next_{req}_{key}_{offset}")]
             )
         else:
             btn.append(
