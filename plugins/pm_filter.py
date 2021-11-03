@@ -93,7 +93,7 @@ async def next_page(bot, query):
         for file in files:
             file_id = file.file_id
             btn.append(
-                [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", url=f'files_#{file_id}')]
+                [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", callback_data=f'files_#{file_id}')]
                 )
     if 0 < offset <= 10:
         off_set = 0
@@ -305,10 +305,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
 
     if query.data.startswith("file"):
         ident, file_id = query.data.split("#")
-        files_ = await get_file_details(file_id)
-        if not files_:
-            return await query.answer('No such file exist.')
-        files = files_[0]
+        files = (await get_file_details(file_id))[0]
         title = files.file_name
         size=get_size(files.file_size)
         f_caption=files.caption
@@ -347,10 +344,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             await query.answer("I Like Your Smartness, But Don't Be Oversmart 😒",show_alert=True)
             return
         ident, file_id = query.data.split("#")
-        files_ = await get_file_details(file_id)
-        if not files_:
-            return await query.answer('No such file exist.')
-        files = files_[0]
+        files = (await get_file_details(file_id))[0]
         title = files.file_name
         size=get_size(files.file_size)
         f_caption=files.caption
@@ -542,7 +536,7 @@ async def auto_filter(client, message):
             for file in files:
                 file_id = file.file_id
                 btn.append(
-                [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", url=f'files_#{file_id}')]
+                [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", callback_data=f'files_#{file_id}')]
                 )
         else:
             await message.reply(quote=True,
