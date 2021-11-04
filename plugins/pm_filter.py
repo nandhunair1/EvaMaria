@@ -7,7 +7,7 @@ from pyrogram.errors.exceptions.bad_request_400 import MediaEmpty, PhotoInvalidD
 from Script import script
 import pyrogram
 from database.connections_mdb import active_connection, all_connections, delete_connection, if_active, make_active, make_inactive
-from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB
+from info import ADMINS, AUTH_CHANNEL, AUTH_USERS, CUSTOM_FILE_CAPTION, AUTH_GROUPS, P_TTI_SHOW_OFF, IMDB, IMDB_TEMPLATE
 from pyrogram.types import InlineKeyboardMarkup, InlineKeyboardButton, CallbackQuery
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait, UserIsBlocked, MessageNotModified, PeerIdInvalid
@@ -574,7 +574,36 @@ async def auto_filter(client, message):
             except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
                 pic = imdb.get('poster')
                 poster = pic.replace('.jpg', "._V1_UX360.jpg")
-                await message.reply_photo(photo=poster, caption=f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
+                await message.reply_photo(photo=poster, caption=IMDB_TEMPLATE.format(
+                                                               query = search,
+                                                               title = imdb['title'],
+                                                               votes = imdb['votes'],
+                                                               aka = imdb["aka"],
+                                                               seasons = imdb["seasons"],
+                                                               box_office = imdb['box_office'],
+                                                               localized_title = imdb['localized_title'],
+                                                               kind = imdb['kind'],
+                                                               imdb_id = imdb["imdb_id"],
+                                                               cast = imdb["cast"],
+                                                               runtime = imdb["runtime"],
+                                                               countries = imdb["countries"],
+                                                               certificates = imdb["certificates"],
+                                                               languages = imdb["languages"],
+                                                               director = imdb["director"],
+                                                               writer = imdb["writer"],
+                                                               producer = imdb["producer"],
+                                                               composer = imdb["composer"],
+                                                               cinematographer = imdb["cinematographer"],
+                                                               music_team = imdb["music_team"],
+                                                               distributors = imdb["distributors"],
+                                                               release_date = imdb['release_date'],
+                                                               year = imdb['year'],
+                                                               genres = imdb['genres'],
+                                                               poster = imdb['poster'],
+                                                               plot = imdb['plot'],
+                                                               rating = imdb['rating'],
+                                                               url = imdb['url']
+                                                               )
             except Exception as e:
                 print(e)
                 await message.reply_text(f"<b>🎥Requested For :- {search}</b> \n\n<b>🎬 Title :- <a href={imdb['url']}>{imdb.get('title')}</a></b>\n\n<b>🎭 Genres :- {imdb.get('genres')}</b>\n\n<b>📆 Year :- <a href={imdb['url']}/releaseinfo>{imdb.get('year')}</a></b>\n\n<b>🌟 Rating :- <a href={imdb['url']}/ratings>{imdb.get('rating')}</a> / 10</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(btn))
