@@ -551,6 +551,7 @@ async def auto_filter(client, message):
                 parse_mode="markdown"
             )
             return
+            await asyncio.sleep(25)
 
         if not btn:
             return
