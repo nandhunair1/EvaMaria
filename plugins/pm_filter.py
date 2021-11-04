@@ -623,7 +623,7 @@ async def auto_filter(client, msg, spoll=False):
         )
     imdb = await get_poster(search) if IMDB else None
     if imdb:
-        cap = cap = IMDB_TEMPLATE.format(
+        cap = IMDB_TEMPLATE.format(
             query = search,
             title = imdb['title'],
             votes = imdb['votes'],
