@@ -551,6 +551,8 @@ async def auto_filter(client, message):
                 parse_mode="markdown"
             )
             return
+            await asyncio.sleep(25)
+            await message.delete()
 
         if not btn:
             return
