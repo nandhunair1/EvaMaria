@@ -550,8 +550,6 @@ async def auto_filter(client, message):
                 ),
                 parse_mode="markdown"
             )
-            await asyncio.sleep(5)
-            await quote.delete()
             return
 
         if not btn:
