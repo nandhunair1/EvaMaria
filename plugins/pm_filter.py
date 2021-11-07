@@ -550,7 +550,7 @@ async def auto_filter(client, message):
                 ),
                 parse_mode="markdown"
             )
-            await asyncio.sleep(10)
+            await asyncio.sleep(20)
             await msg.delete()
             return
 
