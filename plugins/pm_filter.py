@@ -540,11 +540,11 @@ async def auto_filter(client, message):
                 )
         else:
             msg = await message.reply(quote=True,
-            text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**""",
+            text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**""",
             reply_markup=InlineKeyboardMarkup(
                     [
                         [
-                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/tvseriezzz/91968")
+                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
                         ],
                         [
                             InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url="https://www.google.com")
