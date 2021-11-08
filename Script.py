@@ -71,7 +71,7 @@ class script(object):
     EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
 
 <b>NOTE:</b>
-these are the extra features of tessa
+these are the extra features of Alan Walker
 
 <b>Commands and Usage:</b>
 • /id - <code>get id of a specifed user.</code>
@@ -91,6 +91,7 @@ This module only works for my admins
 • /leave  - <code>to leave from a chat.</code>
 • /disable  -  <code>do disable a chat.</code>
 • /ban  - <code>to ban a user.</code>
+• /delete - <code>to delete a specific file from db.</code>
 • /unban  - <code>to unban a user.</code>
 • /channel - <code>to get list of total connected channels</code>
 • /broadcast - <code>to broadcast a message to all users</code>"""
