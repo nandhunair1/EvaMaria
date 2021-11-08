@@ -538,8 +538,6 @@ async def auto_filter(client, message):
                 btn.append(
                 [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", callback_data=f'files_#{file_id}')]
                 )
-        elif query.data == "rfrsh":
-        await query.answer("Fetching MongoDb DataBase")
         else:
             msg = await message.reply(quote=True,
             text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**""",
