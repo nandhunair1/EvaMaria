@@ -564,7 +564,7 @@ async def auto_filter(client, message):
                 [InlineKeyboardButton(text=f"🎬[{get_size(file.file_size)}]🎥{file.file_name}", callback_data=f'files_#{file_id}')]
                 )
         else:
-            msg = await message.reply(quote=True,
+            await message.reply(quote=True,
             text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**""",
             reply_markup=InlineKeyboardMarkup(
                     [
@@ -578,8 +578,6 @@ async def auto_filter(client, message):
                 ),
                 parse_mode="markdown"
             )
-            await asyncio.sleep(150)
-            await msg.delete()
             return
 
         if not btn:
