@@ -700,7 +700,7 @@ async def auto_filter(client, msg, spoll=False):
             url = imdb['url']
         )
     else:
-        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 Rating :- 7.5/10 | IMDb</b>\n\n<b>🎭 Genre :- Action, Drama, Thriller, Entertainment</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🙂 Group:- ♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</b>"
+        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 Rating :- 7.5/10 | IMDb</b>\n\n<b>🎭 Genre :- Action, Drama, Thriller, Entertainment</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {query.from_user.mention}</b>\n\n<b>🙂 Group:- {query.chat.title} </b>"
     if imdb and imdb.get('poster'):
         try:
             await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -724,7 +724,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply("**Sorry, Friend 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
+        await msg.reply("**Sorry,{query.from_user.mention} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
         reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -760,7 +760,7 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist)) # removing duplicates
     if not movielist:
-        await msg.reply("**Sorry, Friend 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
+        await msg.reply("**Sorry,{query.from_user.mention} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
         reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -782,7 +782,7 @@ async def advantage_spell_chok(msg):
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply("**I couldn't find anything related to that**\n**Did you mean any one of these?**\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply("**Sorry,{query.from_user.mention} 🥺**\n\n**I couldn't find anything related to that**\n**Did you mean any one of these?**\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(25)
     await m.delete()
     
