@@ -731,7 +731,7 @@ async def advantage_spell_chok(msg):
                             InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
                         ],
                         [
-                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url=f"https://www.google.com/search?q={search}")
+                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url="https://www.google.com")
                         ]
                     ]
                 ),
@@ -767,7 +767,7 @@ async def advantage_spell_chok(msg):
                             InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
                         ],
                         [
-                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url=f"https://www.google.com/search?q={search}")
+                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url="https://www.google.com")
                         ]
                     ]
                 ),
