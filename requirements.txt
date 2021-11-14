@@ -7,7 +7,3 @@ umongo==3.0.0
 requests
 bs4
 imdbpy
-Pyrogram
-youtube_search
-ffmpeg-python
-ffmpeg
