@@ -3,6 +3,7 @@ import time
 import ffmpeg
 import logging
 import requests
+import youtube_dl
 from pyrogram import filters, Client, idle
 from youtube_search import YoutubeSearch
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
