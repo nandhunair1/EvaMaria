@@ -8,7 +8,6 @@ requests
 bs4
 imdbpy
 Pyrogram
-youtube_dl
 youtube_search
 ffmpeg-python
 ffmpeg
