@@ -46,19 +46,6 @@ class Bot(Client):
         await super().stop()
         logging.info("Bot stopped. Bye.")
 
-    if __name__ == "__main__" :
-    plugins = dict(
-        root="plugins"
-    )
-    bot = Client(
-        "Music-Bot",
-        bot_token=BOT_TOKEN,
-        api_hash=API_HASH,
-        api_id=API_ID,
-        plugins=plugins
-    )
-    bot.run()
-
 
 app = Bot()
 app.run()
