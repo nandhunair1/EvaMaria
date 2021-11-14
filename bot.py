@@ -13,6 +13,7 @@ from database.ia_filterdb import Media
 from database.users_chats_db import db
 from info import SESSION, API_ID, API_HASH, BOT_TOKEN, LOG_STR
 from utils import temp
+import os
 
 class Bot(Client):
 
@@ -44,6 +45,19 @@ class Bot(Client):
     async def stop(self, *args):
         await super().stop()
         logging.info("Bot stopped. Bye.")
+
+    if __name__ == "__main__" :
+    plugins = dict(
+        root="plugins"
+    )
+    bot = Client(
+        "Music-Bot",
+        bot_token=BOT_TOKEN,
+        api_hash=API_HASH,
+        api_id=API_ID,
+        plugins=plugins
+    )
+    bot.run()
 
 
 app = Bot()
