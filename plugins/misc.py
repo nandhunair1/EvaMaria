@@ -189,9 +189,7 @@ async def imdb_callback(bot: Client, query: CallbackQuery):
             poster = imdb['poster'],
             plot = imdb['plot'],
             rating = imdb['rating'],
-            url = imdb['url'], 
-            message.from_user.mention = mention, 
-            message.chat.title = group
+            url = imdb['url']
         )
     else:
         caption = "No Results"
