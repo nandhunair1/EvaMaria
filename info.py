@@ -1,5 +1,6 @@
 import re
 from os import environ
+import asyncio
 import pyrogram
 
 id_pattern = re.compile(r'^.\d+$')
