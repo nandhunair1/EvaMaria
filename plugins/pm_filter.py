@@ -153,9 +153,11 @@ async def next_page(bot, query):
             ],
         )
     try:
-        await query.edit_message_reply_markup( 
+        n = await query.edit_message_reply_markup( 
             reply_markup=InlineKeyboardMarkup(btn)
         )
+        await asyncio.sleep(8)
+        await n.delete()
     except MessageNotModified:
         pass
     await query.answer()
@@ -718,16 +720,24 @@ async def auto_filter(client, msg, spoll=False):
         cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>"
     if imdb and imdb.get('poster'):
         try:
-            await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            b = await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            await asyncio.sleep(8)
+            await b.delete()
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
             await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            c = await asyncio.sleep(8)
+            await c.delete()
         except Exception as e:
             logger.exception(e)
             await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            a = await asyncio.sleep(8)
+            await a.delete()
     else:
-        await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+        d = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+        await asyncio.sleep(8)
+        await d.delete()
     if spoll:
         await msg.message.delete()
         
