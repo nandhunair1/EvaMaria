@@ -153,11 +153,9 @@ async def next_page(bot, query):
             ],
         )
     try:
-        n = await query.edit_message_reply_markup( 
+        await query.edit_message_reply_markup( 
             reply_markup=InlineKeyboardMarkup(btn)
         )
-        await asyncio.sleep(600)
-        await n.delete()
     except MessageNotModified:
         pass
     await query.answer()
@@ -726,13 +724,13 @@ async def auto_filter(client, msg, spoll=False):
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
-            await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
-            c = await asyncio.sleep(600)
+            c = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            await asyncio.sleep(600)
             await c.delete()
         except Exception as e:
             logger.exception(e)
-            await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
-            a = await asyncio.sleep(600)
+            a = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            await asyncio.sleep(600)
             await a.delete()
     else:
         d = await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
