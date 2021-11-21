@@ -3,6 +3,7 @@ import logging
 import random
 import asyncio
 from Script import script
+from pyrogram.types import Message
 from pyrogram import Client, filters
 from pyrogram.errors.exceptions.bad_request_400 import ChatAdminRequired
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
