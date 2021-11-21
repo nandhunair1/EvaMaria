@@ -1,7 +1,7 @@
 import re
 from os import environ
 import asyncio
-import pyrogram
+from pyrogram.types import Message
 
 id_pattern = re.compile(r'^.\d+$')
 def is_enabled(value, default):
