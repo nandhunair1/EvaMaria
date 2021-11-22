@@ -41,50 +41,114 @@ GENRES = ["fun, fact",
          "Crime, Mystery, Thriller",
          "Biography, Drama"]
 
-@Client.on_message(filters.group & filters.text & ~filters.edited & filters.incoming)
-async def give_filter(client,message):
-    group_id = message.chat.id
-    name = message.text
+@Client.on_message(filters.text & filters.private & filters.incoming & filters.user(AUTH_USERS) if AUTH_USERS else filters.text & filters.private & filters.incoming)
+async def filter(client, message):
+    if message.text.startswith("/"):
+        return
+    if AUTH_CHANNEL:
+        invite_link = await client.create_chat_invite_link(int(AUTH_CHANNEL))
+        try:
+            user = await client.get_chat_member(int(AUTH_CHANNEL), message.from_user.id)
+            if user.status == "kicked":
+                await client.send_message(
+                    chat_id=message.from_user.id,
+                    text="Sorry Sir, You are Banned to use me.",
+                    parse_mode="markdown",
+                    disable_web_page_preview=True
+                )
+                return
+        except UserNotParticipant:
+            await client.send_message(
+                chat_id=message.from_user.id,
+                text="**Please Join My Updates Channel to use this Bot!**",
+                reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("🤖 Join Updates Channel", url=invite_link.invite_link)
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
+        except Exception:
+            await client.send_message(
+                chat_id=message.from_user.id,
+                text="Something went Wrong.",
+                parse_mode="markdown",
+                disable_web_page_preview=True
+            )
+            return
+    if re.findall("((^\/|^,|^!|^\.|^[\U0001F600-\U000E007F]).*)", message.text):
+        return
+    if 2 < len(message.text) < 100:    
+        btn = []
+        search = message.text
+        files = await get_filter_results(query=search)
+        if files:
+            for file in files:
+                file_id = file.file_id
+                filename = f"🎬[{get_size(file.file_size)}]🎥{file.file_name}"
+                btn.append(
+                    [InlineKeyboardButton(text=f"{filename}",callback_data=f"subinps#{file_id}")]
+                    )
+        else:
+            await client.send_message(chat_id=message.from_user.id,text=f"""**Sorry, {message.from_user.first_name} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**""",
+            reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+                        ],
+                        [
+                            InlineKeyboardButton("🔍 Click Here & Go To Google 🔎", url=f"https://www.google.com")
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
+            return
 
-    keywords = await get_filters(group_id)
-    for keyword in reversed(sorted(keywords, key=len)):
-        pattern = r"( |^|[^\w])" + re.escape(keyword) + r"( |$|[^\w])"
-        if re.search(pattern, name, flags=re.IGNORECASE):
-            reply_text, btn, alert, fileid = await find_filter(group_id, keyword)
+        if not btn:
+            return
 
-            if reply_text:
-                reply_text = reply_text.replace("\\n", "\n").replace("\\t", "\t")
+        if len(btn) > 10: 
+            btns = list(split_list(btn, 10)) 
+            keyword = f"{message.chat.id}-{message.message_id}"
+            BUTTONS[keyword] = {
+                "total" : len(btns),
+                "buttons" : btns
+            }
+        else:
+            buttons = btn
+            buttons.append(
+                [InlineKeyboardButton(text="⚜ Pages 1/1 ⚜",callback_data="pages")]
+            )
+            poster=None
+            if API_KEY:
+                poster=await get_poster(search)
+            if poster:
+                await message.reply_photo(photo=poster, caption=f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>😌 Group:- {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(buttons))
 
-            if btn is not None:
-                try:
-                    if fileid == "None":
-                        if btn == "[]":
-                            await message.reply_text(reply_text, disable_web_page_preview=True)
-                        else:
-                            button = eval(btn)
-                            await message.reply_text(
-                                reply_text,
-                                disable_web_page_preview=True,
-                                reply_markup=InlineKeyboardMarkup(button)
-                            )
-                    elif btn == "[]":
-                        await message.reply_cached_media(
-                            fileid,
-                            caption=reply_text or ""
-                        )
-                    else:
-                        button = eval(btn) 
-                        await message.reply_cached_media(
-                            fileid,
-                            caption=reply_text or "",
-                            reply_markup=InlineKeyboardMarkup(button)
-                        )
-                except Exception as e:
-                    logger.exception(e)
-                break 
+            else:
+                await message.reply_text(f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>😌 Group:- {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(buttons))
+            return
 
-    else:
-        await auto_filter(client, message)   
+        data = BUTTONS[keyword]
+        buttons = data['buttons'][0].copy()
+
+        buttons.append(
+            [InlineKeyboardButton(text="𝙽𝚎𝚡𝚝»»»",callback_data=f"next_0_{keyword}")]
+        )    
+        buttons.append(
+            [InlineKeyboardButton(text=f"⚜ Pages 1/{data['total']} ⚜",callback_data="pages")]
+        )
+        poster=None
+        if API_KEY:
+            poster=await get_poster(search)
+        if poster:
+            await message.reply_photo(photo=poster, caption=f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>😌 Group:- {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(buttons))
+        else:
+            await message.reply_text(f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>😌 Group:- {message.chat.title} </b>", reply_markup=InlineKeyboardMarkup(buttons))   
 
 @Client.on_callback_query(filters.regex(r"^next"))
 async def next_page(bot, query):
