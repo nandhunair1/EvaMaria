@@ -1,4 +1,4 @@
-# codes added by @PaulWalker_tg
+# codes added by @MrC_VENOM
 # use with proper credits
 
 from pyrogram import Client, filters
