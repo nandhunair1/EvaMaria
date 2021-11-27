@@ -826,7 +826,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply("**Sorry, {message.from_user.mention} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
+        await msg.reply("**Sorry, 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
         reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -862,7 +862,7 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist)) # removing duplicates
     if not movielist:
-        await msg.reply("**Sorry, {message.from_user.mention} 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
+        await msg.reply("**Sorry, 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
         reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -884,7 +884,7 @@ async def advantage_spell_chok(msg):
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply("**😑 {message.from_user.mention} I couldn't find anything related to that**\n**Did you mean any one of these?**\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply("**😑 I couldn't find anything related to that**\n**Did you mean any one of these?**\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(25)
     await m.delete()
     
