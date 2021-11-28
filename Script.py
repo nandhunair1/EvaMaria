@@ -33,47 +33,12 @@ class script(object):
 📜 𝚀𝚞𝚘𝚝𝚎 : ആരും പേടിക്കണ്ട എല്ലാവർക്കും കിട്ടും™️
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    FUN_TXT ="""<b>FUN MODULE</b> 
-    
-<b>🎲 NOTHING MUCH JUST SOME FUN THINGS</b>
-t𝗋𝗒 𝗍𝗁𝗂𝗌 𝖮𝗎𝗍: 
-𝟣. /dice - Roll The Dice 
-𝟤. /throw 𝗈𝗋 /dart - 𝖳𝗈 𝖬𝖺𝗄𝖾 Drat
-3. /runs - Just For Fun
-4. /goal or /shoot - To Make A Goal Or Shoot
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     SOURCE_TXT = """<b>NOTE:</b>
 - <b>Alan Walker is a open source bot.</b>
 
 - <b>Support Group - <a href=https://t.me/tvseriezzz>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a></b>
 
 - <b>Update Channel - <a href=https://t.me/tvseriezzz_update>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 {𝐔𝐩𝐝𝐚𝐭𝐞}</a></b>
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    PIN_TXT ="""<b>PIN MODULE</b>
-<b>Pin :</b>
-
-<b>All The Pin Related Commands Can Be Found Here; Keep Your Chat Up To Date On The Latest News With A Simple Pinned Message!</b>
-
-<b>📚 Commands & Usage:</b>
-
-◉ /pin :- Pin The Message You Replied To Message To Send A Notification To Group Members
-◉ /unpin :- Unpin The Current Pinned Message. If Used As A Reply, Unpins The Replied To Message
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    PASTE_TXT = """Help: <b>Paste</b>
-
-Paste some texts or documents on a website!
-
-<b>Commands and Usage:</b>
-
-• /paste [text] - paste the given text on Pasty
-
-<b>NOTE:</b>
-
-• These commands works on both pm and group.
-• These commands can be used by any group member.
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     BAN_TXT ="""<b>Bans:</b>
@@ -149,48 +114,6 @@ Paste some texts or documents on a website!
 • /search  - <code>get the film information from various sources.</code>
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    SCORE_TXT ="""<b>𝐋𝐈𝐕𝐄 𝐒𝐂𝐎𝐑𝐄:</b>
-• /cs  - <code>Gathering ongoing match scorecard.</code>
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    PINGS_TXT ="""<b>🌟 Ping:</b>
-
-Helps you to know your ping 🚶🏼‍♂️
-
-<b>Commands:</b>
-
-• /alive - To check you are alive.
-• /help - To get help 
-• /ping - To get your ping 
-• /repo - Source Code. 
-
-<b>🏹Usage🏹 :</b>
-
-• This commands can be used in pms and groups
-• This commands can be used buy everyone in the groups and bots pm
-• Share us for more features
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    JSON_TXT ="""<b>JSON:</b>
-Bot returns json for all replied messages with /json
-
-<b>Features:</b>
-Message Editting JSON
-Pm Support
-Group Support
-
-<b>Note:</b>
-Everyone can use this command , if spaming happens bot will automatically ban you from the group
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    PURGE_TXT = """<b>💣Purge💣</b>
-    
-Delete A Lot Of Messages From Groups! 
-    
- <b>ADMIN</b> 
-◉ /purge :- Delete All Messages From The Replied To Message, To The Current Message
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     EXTRAMOD_TXT = """Help: <b>Extra Modules</b>
 
 <b>NOTE:</b>
@@ -199,20 +122,6 @@ these are the extra features of Alan Walker
 <b>Commands and Usage:</b>
 • /id - <code>get id of a specifed user.</code>
 • /info  - <code>get information about a user.</code>
-
-©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    TELE_TXT = """<b>▫️HELP: Telegraph▪️</b>
-
-Do as you wish with telegra.ph module!
-
-</b>USAGE:</b>
-
-🤧 /telegraph - Send me Picture or Vide Under (5MB)
-
-<b>NOTE:</b>
-• Alan Walker should have admin privillage.
-• This Command Is Available in goups and pms
-• This Command Can be used by everyone
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     FILTER_TXT = """𝐒𝐄𝐋𝐄𝐂𝐓 𝐀 𝐅𝐈𝐋𝐓𝐄𝐑 𝐓𝐘𝐏𝐄 𝐁𝐄𝐋𝐎𝐖
