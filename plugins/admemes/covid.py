@@ -1,6 +1,7 @@
 import requests
 from pyrogram import Client, filters
 from telegram import ParseMode, Update
+from telegram.ext import CallbackContext, run_async
 
 @Client.on_message(filters.command("covid", "corona"))
 async def covid(update: Update, context: CallbackContext):
