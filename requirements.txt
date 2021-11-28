@@ -8,4 +8,4 @@ requests
 bs4
 imdbpy
 telegraph
-py-Ultroid==2021.10.11.1
+akinator
