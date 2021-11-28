@@ -1,10 +1,10 @@
 import requests
 from pyrogram import Client, filters
 from telegram import ParseMode, Update
-from telegram.ext import CallbackContext, run_async
+from info import COMMAND_HAND_LER
 
 @Client.on_message(filters.command("covid", "corona"))
-async def covid(update: Update, context: CallbackContext):
+async def covid(update: Update, context: COMMAND_HAND_LER):
     message = update.effective_message
     text = message.text.split(" ", 1)
     if len(text) == 1:
