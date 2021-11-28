@@ -469,7 +469,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
         )
     elif query.data == "help":
         buttons = [[
-            InlineKeyboardButton('🏷Filter', callback_data='filter'),
+            InlineKeyboardButton('🔴 Live Score', callback_data='score'),
             InlineKeyboardButton('📽 IMDB', callback_data='imbd'),
             InlineKeyboardButton('👮‍♂️ Admin', callback_data='admin')
             ],[
@@ -486,8 +486,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('✴️ Ping', callback_data='pings'),
             InlineKeyboardButton('📸 Telegraph', callback_data='tele')
             ],[
+            InlineKeyboardButton('🏷 Filter', callback_data='filter'),
+            InlineKeyboardButton('🔮 Status', callback_data='stats')
+            ],[
             InlineKeyboardButton('🏠 Home', callback_data='start'),
-            InlineKeyboardButton('🔮 Status', callback_data='stats'),
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
         ]]
         reply_markup = InlineKeyboardMarkup(buttons)
@@ -673,6 +675,16 @@ async def cb_handler(client: Client, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
             text=script.TELE_TXT,
+            reply_markup=reply_markup,
+            parse_mode='html'
+        )
+    elif query.data == "score":
+        buttons = [[
+            InlineKeyboardButton('👩‍🦯 Back', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.SCORE_TXT,
             reply_markup=reply_markup,
             parse_mode='html'
         )
