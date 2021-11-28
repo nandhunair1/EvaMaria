@@ -135,6 +135,10 @@ t𝗋𝗒 𝗍𝗁𝗂𝗌 𝖮𝗎𝗍:
 • /search  - <code>get the film information from various sources.</code>
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
+    SCORE_TXT ="""<b>𝐋𝐈𝐕𝐄 𝐒𝐂𝐎𝐑𝐄:</b>
+• /cs  - <code>Gathering ongoing match scorecard.</code>
+
+©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     PINGS_TXT ="""<b>🌟 Ping:</b>
 
 Helps you to know your ping 🚶🏼‍♂️
