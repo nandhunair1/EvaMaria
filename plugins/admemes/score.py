@@ -2,7 +2,7 @@ import os
 import logging
 from bs4 import BeautifulSoup
 import requests
-from pyrogram import Client, filters, idle
+from pyrogram import Client, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 
 @Client.on_message(filters.command("cs"))
@@ -29,6 +29,3 @@ async def score(_, message):
         print(str(e))
         return await m.edit("`No any ongoing matches at this time.`")
 
-
-bot.start()
-idle()
