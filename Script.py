@@ -62,6 +62,20 @@ t𝗋𝗒 𝗍𝗁𝗂𝗌 𝖮𝗎𝗍:
 ◉ /unpin :- Unpin The Current Pinned Message. If Used As A Reply, Unpins The Replied To Message
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
+    PASTE_TXT = """Help: <b>Paste</b>
+
+Paste some texts or documents on a website!
+
+<b>Commands and Usage:</b>
+
+• /paste [text] - paste the given text on Pasty
+
+<b>NOTE:</b>
+
+• These commands works on both pm and group.
+• These commands can be used by any group member.
+
+©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     BAN_TXT ="""<b>Bans:</b>
 <b>Some people need to be publicly banned; spammers, annoyances, or just trolls.</b>
 
