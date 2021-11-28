@@ -473,10 +473,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('👮‍♂️ Admin', callback_data='admin'), 
             InlineKeyboardButton('🔖 Ban', callback_data='bn')
             ],[
-            InlineKeyboardButton('⛓️ Connection', callback_data='coct'),
             InlineKeyboardButton('🗓 Info', callback_data='extra'), 
             InlineKeyboardButton('🏷 Filter', callback_data='filter')
             ],[
+            InlineKeyboardButton('⛓️ Connect', callback_data='coct'),
             InlineKeyboardButton('🔮 Status', callback_data='stats')
             ],[
             InlineKeyboardButton('🏠 Home', callback_data='start'),
