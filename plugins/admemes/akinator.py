@@ -3,14 +3,13 @@ import re
 import akinator
 from telethon.errors import BotMethodInvalidError
 
-from . import Button, asst, callback, get_string, in_pattern, types
+from . import Button, asst, callback, get_string, in_pattern, types, ultroid_cmd
 
 games = {}
 aki_photo = "https://telegra.ph/file/b0ff07069e8637783fdae.jpg"
 
 
-@Client.on_message(
-    filters.command("akinator", COMMAND_HAND_LER)
+@ultroid_cmd(pattern="akinator")
 async def doit(e):
     sta = akinator.Akinator()
     games.update({e.chat_id: {e.id: sta}})
