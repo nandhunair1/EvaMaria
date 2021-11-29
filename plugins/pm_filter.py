@@ -741,7 +741,7 @@ async def auto_filter(client, msg, spoll=False):
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
             pic = imdb.get('poster')
             poster = pic.replace('.jpg', "._V1_UX360.jpg")
-            await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            hmm = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
         except Exception as e:
             logger.exception(e)
             await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
@@ -758,19 +758,17 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
-        reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
-                        ],
-                        [
-                            InlineKeyboardButton("🔍 Search On Google 🔎", url=f"https://google.com/search?q={search}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
+        hmm = InlineKeyboardMarkup(
+        [
+            [
+                 InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+            ],
+            [
+                 InlineKeyboardButton("🕵️‍♂️ Search On Google 🕵️‍♂️", url=f"https://google.com/search?q={search}")
+            ]
+        ]
+    )
+        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",, reply_markup=hmm)
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE) # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -794,19 +792,17 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist)) # removing duplicates
     if not movielist:
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",
-        reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
-                        ],
-                        [
-                            InlineKeyboardButton("🔍 Search On Google  🔎", url=f"https://google.com/search?q={search}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
+        hmm = InlineKeyboardMarkup(
+        [
+            [
+                 InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+            ],
+            [
+                 InlineKeyboardButton("🕵️‍♂️ Search On Google 🕵️‍♂️", url=f"https://google.com/search?q={search}")
+            ]
+        ]
+    )
+        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",, reply_markup=hmm)
         return
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
