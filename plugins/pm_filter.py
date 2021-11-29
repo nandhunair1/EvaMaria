@@ -177,7 +177,7 @@ async def advantage_spoll_choker(bot, query):
         k = (movie, files, offset, total_results)
         await auto_filter(bot, query, k)
     else:
-        k = await query.message.edit(f'😌 Hey, {query.from_user.first_name}!\n\nThis Movie/Series Not Found In DataBase 😑\n\nTheater Print Not Available Here..! 😑\nCheck if the DVD is out ... ??⁇😊')
+        k = await query.message.edit(f'<b>😌 Hey, {query.from_user.first_name}!</b>\n\n<b>This Movie/Series Not Found In DataBase 😑</b>\n\n<b>Theater Print Not Available Here..! 😑</b>\n<b>Check if the DVD is out ... ??⁇😊</b>')
         await asyncio.sleep(20)
         await k.delete()
 
@@ -759,7 +759,7 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply(f"Sorry, {msg.from_user.mention}!.. 🥺\n\nNo Movie/Series Related to the Given Word Was Found 🥺\n\nPlease Go to Google and Confirm the Correct Spelling 🙏\n\nPlease Click MUST READ Button Below..!!",
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>",
         reply_markup=InlineKeyboardMarkup(
                     [
                         [
@@ -805,7 +805,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"Sorry, {msg.from_user.mention}!.. 🥺 Your word <b>{search}</b>\n\nNo Movie/Series Related to the Given Word Was Found 🥺\n\nPlease Go to Google and Confirm the Correct Spelling 🙏\n\nPlease Click MUST READ Button Below..!!", reply_markup=hmm)
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word</b>\n\n<b>No Movie/Series Related to the Given Word {search} Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
         return
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
@@ -815,7 +815,7 @@ async def advantage_spell_chok(msg):
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply(f"Sorry,{msg.from_user.mention}!.. 🥺\n\nI couldn't find anything related to that\nDid you mean any one of these?\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply(f"<b>Sorry,{msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(25)
     await m.delete()
     
