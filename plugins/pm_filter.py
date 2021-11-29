@@ -768,7 +768,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",, reply_markup=hmm)
+        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**", reply_markup=hmm)
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE) # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -802,7 +802,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**",, reply_markup=hmm)
+        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**", reply_markup=hmm)
         return
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
