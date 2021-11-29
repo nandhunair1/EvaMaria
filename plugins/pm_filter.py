@@ -178,7 +178,7 @@ async def advantage_spoll_choker(bot, query):
         await auto_filter(bot, query, k)
     else:
         k = await query.message.edit(f'<b>😌 Hey, {query.from_user.first_name}!</b>\n\n<b>This Movie/Series Not Found In DataBase 😑</b>\n\n<b>Theater Print Not Available Here..! 😑</b>\n<b>Check if the DVD is out ... ??⁇😊</b>')
-        await asyncio.sleep(20)
+        await asyncio.sleep(35)
         await k.delete()
 
 
@@ -816,7 +816,7 @@ async def advantage_spell_chok(msg):
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
     m = await msg.reply(f"<b>Sorry,{msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
-    await asyncio.sleep(25)
+    await asyncio.sleep(35)
     await m.delete()
     
 
