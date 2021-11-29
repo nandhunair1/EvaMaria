@@ -768,7 +768,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**", reply_markup=hmm)
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word {search}</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE) # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -802,7 +802,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**No Movie/Series Related to the Given Word Was Found 🥺**\n\n**Please Go to Google and Confirm the Correct Spelling 🙏**\n\n**Please Click MUST READ Button Below..!!**", reply_markup=hmm)
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word {search}</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
         return
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
@@ -812,7 +812,7 @@ async def advantage_spell_chok(msg):
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply(f"**Sorry, {msg.from_user.mention}!.. 🥺**\n\n**I couldn't find anything related to that**\n**Did you mean any one of these?**\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n</b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(25)
     await m.delete()
     
