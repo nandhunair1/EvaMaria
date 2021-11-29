@@ -238,7 +238,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 except:
                     pass
             else:
-                await query.answer(f'😑 Hey, {query.from_user.first_name}! Thats not for you!!",show_alert=True)
+                await query.answer(f"😑 Hey, {query.from_user.first_name}! Thats not for you!!",show_alert=True)
 
 
     elif "groupcb" in query.data:
