@@ -177,7 +177,7 @@ async def advantage_spoll_choker(bot, query):
         k = (movie, files, offset, total_results)
         await auto_filter(bot, query, k)
     else:
-        k = await query.message.edit(f'**😌 Hey, {query.from_user.first_name}!**\n\n**This Movie/Series Not Found In DataBase 😑**\n\n**Theater Print Not Available Here..! 😑**\n**Check if the DVD is out ... ??⁇😊**')
+        k = await query.message.edit(f'😌 Hey, {query.from_user.first_name}!\n\nThis Movie/Series Not Found In DataBase 😑\n\nTheater Print Not Available Here..! 😑\nCheck if the DVD is out ... ??⁇😊')
         await asyncio.sleep(20)
         await k.delete()
 
@@ -759,7 +759,19 @@ async def advantage_spell_chok(msg):
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word {search}</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
+        await msg.reply(f"Sorry, {msg.from_user.mention}!.. 🥺\n\nNo Movie/Series Related to the Given Word Was Found 🥺\n\nPlease Go to Google and Confirm the Correct Spelling 🙏\n\nPlease Click MUST READ Button Below..!!",
+        reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+                        ],
+                        [
+                            InlineKeyboardButton("🔍 Search On Google 🔎", url=f"https://google.com/search?q={search}")
+                        ]
+                    ]
+                ),
+                parse_mode="markdown"
+            )
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE) # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
