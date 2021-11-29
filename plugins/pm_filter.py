@@ -805,7 +805,7 @@ async def advantage_spell_chok(msg):
             ]
         ]
     )
-        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word</b>\n\n<b>No Movie/Series Related to the Given Word {search} Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
         return
     SPELL_CHECK[msg.message_id] = movielist
     btn = [[
