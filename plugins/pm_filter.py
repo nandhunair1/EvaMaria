@@ -735,11 +735,13 @@ async def auto_filter(client, msg, spoll=False):
         )
     else:
         cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>"
-    if imdb:
+    if imdb and imdb.get('poster'):
         try:
-            await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            await message.reply_photo(photo=imdb.get('poster'), caption=cap, reply_markup=InlineKeyboardMarkup(btn))
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
-            hmm = await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
+            pic = imdb.get('poster')
+            poster = pic.replace('.jpg', "._V1_UX360.jpg")
+            hmm = await message.reply_photo(photo=poster, caption=cap, reply_markup=InlineKeyboardMarkup(btn))
         except Exception as e:
             logger.exception(e)
             await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
