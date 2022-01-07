@@ -8,7 +8,7 @@ from pyrogram.errors import ChatAdminRequired, FloodWait
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from database.ia_filterdb import Media, get_file_details, unpack_new_file_id
 from database.users_chats_db import db
-from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION
+from info import CHANNELS, ADMINS, AUTH_CHANNEL, LOG_CHANNEL, PICS, BATCH_FILE_CAPTION, CUSTOM_FILE_CAPTION
 from utils import get_size, is_subscribed, temp
 import re
 import json
@@ -152,7 +152,7 @@ async def start(client, message):
             except Exception as e:
                 logger.warning(e, exc_info=True)
                 continue
-
+            await asyncio.sleep(1)
         await sts.delete()
         return
     elif file_id.split("-", 1)[0] == "DSTORE":
@@ -169,7 +169,8 @@ async def start(client, message):
                 await client.copy_message(chat_id=message.chat.id, from_chat_id=int(f_chat_id), message_id=msg)
             except Exception as e:
                 logger.exception(e)
-                continue  
+                continue
+            await asyncio.sleep(1)  
         return await sts.delete()
 
     files_ = await get_file_details(file_id)
@@ -184,9 +185,9 @@ async def start(client, message):
             title = file.file_name
             size=get_size(file.file_size)
             f_caption = f"<code>{title}</code>"
-            if BATCH_FILE_CAPTION:
+            if CUSTOM_FILE_CAPTION:
                 try:
-                    f_caption=BATCH_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
+                    f_caption=CUSTOM_FILE_CAPTION.format(file_name= '' if title is None else title, file_size='' if size is None else size, file_caption='')
                 except:
                     return
             await msg.edit_caption(f_caption)
@@ -198,9 +199,9 @@ async def start(client, message):
     title = files.file_name
     size=get_size(files.file_size)
     f_caption=files.caption
-    if BATCH_FILE_CAPTION:
+    if CUSTOM_FILE_CAPTION:
         try:
-            f_caption=BATCH_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
+            f_caption=CUSTOM_FILE_CAPTION.format(file_name=title, file_size=size, file_caption=f_caption)
         except Exception as e:
             logger.exception(e)
             f_caption=f_caption
