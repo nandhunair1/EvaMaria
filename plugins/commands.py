@@ -152,7 +152,7 @@ async def start(client, message):
             except Exception as e:
                 logger.warning(e, exc_info=True)
                 continue
-            await asyncio.sleep(1)
+            await asyncio.sleep(1) 
         await sts.delete()
         return
     elif file_id.split("-", 1)[0] == "DSTORE":
@@ -178,7 +178,7 @@ async def start(client, message):
                 except Exception as e:
                     logger.exception(e)
                     continue
-                elif msg.empty:
+            elif msg.empty:
                 continue
             else:
                 try:
@@ -348,4 +348,3 @@ async def delete_all_index_confirm(bot, message):
     await Media.collection.drop()
     await message.answer()
     await message.message.edit('Succesfully Deleted All The Indexed Files.')
-
