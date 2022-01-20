@@ -49,7 +49,7 @@ GENRES = ["fun, fact",
 async def give_filter(client, message):
     k = await manual_filters(client, message)
     if k == False:
-        await auto_filter(client, message)   
+        await auto_filter(client, message)
 
 
 @Client.on_callback_query(filters.regex(r"^next"))
@@ -188,11 +188,10 @@ async def cb_handler(client: Client, query: CallbackQuery):
             return await query.answer('Piracy Is Crime')
 
         st = await client.get_chat_member(grp_id, userid)
-        if (st.status == "creator") or (str(userid) in ADMINS):    
+        if (st.status == "creator") or (str(userid) in ADMINS):
             await del_all(query.message, grp_id, title)
         else:
             await query.answer("f'😑 Hey, {query.from_user.first_name}! You need to be Group Owner or an Auth User to do that!",show_alert=True)
-
     elif query.data == "delallcancel":
         userid = query.from_user.id
         chat_type = query.message.chat.type
@@ -212,8 +211,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     pass
             else:
                 await query.answer(f"😑 Hey, {query.from_user.first_name}! Thats not for you!!",show_alert=True)
-
-
     elif "groupcb" in query.data:
         await query.answer()
 
@@ -337,7 +334,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
                 "Your connected group details ;\n\n",
                 reply_markup=InlineKeyboardMarkup(buttons)
             )
-
     elif "alertmessage" in query.data:
         grp_id = query.message.chat.id
         i = query.data.split(":")[1]
@@ -347,7 +343,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             alerts = ast.literal_eval(alerts)
             alert = alerts[int(i)]
             alert = alert.replace("\\n", "\n").replace("\\t", "\t")
-            await query.answer(alert,show_alert=True)
+            await query.answer(alert, show_alert=True)
     if query.data.startswith("file"):
         ident, file_id = query.data.split("#")
         files_ = await get_file_details(file_id)
@@ -383,9 +379,9 @@ async def cb_handler(client: Client, query: CallbackQuery):
                     caption=f_caption,
                     protect_content=True if ident == "filep" else False 
                 )
-                await query.answer(f'😉 Hey, {query.from_user.first_name}! Check PM, I have sent files in pm',show_alert=True)
+                await query.answer(f'😉 Hey, {query.from_user.first_name}! Check PM, I have sent files in pm', show_alert=True)
         except UserIsBlocked:
-            await query.answer(f'😃 Hey, {query.from_user.first_name}! Unblock the bot mahn !',show_alert=True)
+            await query.answer(f'😃 Hey, {query.from_user.first_name}! Unblock the bot mahn !', show_alert=True)
         except PeerIdInvalid:
             await query.answer(url=f"https://t.me/{temp.U_NAME}?start={ident}_{file_id}")
         except Exception as e:
@@ -419,7 +415,6 @@ async def cb_handler(client: Client, query: CallbackQuery):
             caption=f_caption,
             protect_content=True if ident == 'checksubp' else False
         )
-
     elif query.data == "pages":
         await query.answer()
     elif query.data == "start":
@@ -676,7 +671,7 @@ async def cb_handler(client: Client, query: CallbackQuery):
             reply_markup = InlineKeyboardMarkup(buttons)
             await query.message.edit_reply_markup(reply_markup)
     await query.answer('Piracy Is Crime')
-    
+
 
 async def auto_filter(client, msg, spoll=False):
     if not spoll:
@@ -696,7 +691,7 @@ async def auto_filter(client, msg, spoll=False):
         else:
             return
     else:
-        settings = await get_settings(message.chat.id)
+        settings = await get_settings(msg.message.chat.id)
         message = msg.message.reply_to_message  # msg will be callback query
         search, files, offset, total_results = spoll
     pre = 'filep' if settings['file_secure'] else 'file'
@@ -718,7 +713,7 @@ async def auto_filter(client, msg, spoll=False):
                 ),
                 InlineKeyboardButton(
                     text=f"{get_size(file.file_size)}",
-                    callback_data=f'{pre}#{file.file_id}',
+                    callback_data=f'{pre}_#{file.file_id}',
                 ),
             ]
             for file in files
@@ -787,12 +782,12 @@ async def auto_filter(client, msg, spoll=False):
         await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
     if spoll:
         await msg.message.delete()
-        
+
 
 async def advantage_spell_chok(msg):
     query = re.sub(
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
-        "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words 
+        "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
     query = query.strip() + " movie"
     search = msg.text
     g_s = await search_gagala(query)
@@ -813,14 +808,14 @@ async def advantage_spell_chok(msg):
                 parse_mode="markdown"
             )
         return
-    regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE) #  look for imdb / wiki results
+    regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
     gs_parsed = [re.sub(
         r'\b(\-([a-zA-Z-\s])\-\simdb|(\-\s)?imdb|(\-\s)?wikipedia|\(|\)|\-|reviews|full|all|episode(s)?|film|movie|series)',
         '', i, flags=re.IGNORECASE) for i in gs]
     if not gs_parsed:
         reg = re.compile(r"watch(\s[a-zA-Z0-9_\s\-\(\)]*)*\|.*",
-                         re.IGNORECASE)  # match something like Watch Niram | Amazon Prime 
+                         re.IGNORECASE)  # match something like Watch Niram | Amazon Prime
         for mv in g_s:
             match = reg.match(mv)
             if match:
@@ -858,7 +853,8 @@ async def advantage_spell_chok(msg):
                 )
             ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔", reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔",
+                        reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(35)
     await m.delete()
 
@@ -888,7 +884,7 @@ async def manual_filters(client, message, text=False):
                                 reply_text,
                                 disable_web_page_preview=True,
                                 reply_markup=InlineKeyboardMarkup(button),
-                                reply_to_message_id = reply_id
+                                reply_to_message_id=reply_id
                             )
                     elif btn == "[]":
                         await client.send_cached_media(
@@ -910,4 +906,3 @@ async def manual_filters(client, message, text=False):
                 break
     else:
         return False
-
