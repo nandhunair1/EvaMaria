@@ -212,8 +212,7 @@ async def start(client, message):
                     continue
             await asyncio.sleep(1) 
         return await sts.delete()
-
-
+        
 
     files_ = await get_file_details(file_id)
     if not files_:
