@@ -838,7 +838,7 @@ async def advantage_spell_chok(msg):
         )
     ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    m = await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔",
+    m = await msg.reply("<b>Sorry...! 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔",
                         reply_markup=InlineKeyboardMarkup(btn))
     await asyncio.sleep(35)
     await m.delete()
