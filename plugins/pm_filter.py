@@ -127,7 +127,7 @@ async def advantage_spoll_choker(bot, query):
     if not movies:
         return await query.answer(f"😢 Hey, {query.from_user.first_name}! You are clicking on an old button which is expired.🙂", show_alert=True)
     movie = movies[(int(movie_))]
-    await query.answer('Checking Your Request 😌😌....')
+    await query.answer('Checking Your Request....')
     k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
@@ -135,7 +135,7 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit(f'<b>😌 Hey, {query.from_user.first_name}!</b>\n\n<b>This Movie/Series Not Found In DataBase 😑</b>\n\n<b>Theater Print Not Available Here..! 😑</b>\n<b>Check if the DVD is out ... ??⁇😊</b>')
+            k = await query.message.edit('<b>😌 Hey !</b>\n\n<b>This Movie/Series Not Found In DataBase 😑</b>\n\n<b>Theater Print Not Available Here..! 😑</b>\n<b>Check if the DVD is out ... ??⁇😊</b>')
             await asyncio.sleep(35)
             await k.delete()
 
