@@ -127,7 +127,7 @@ async def advantage_spoll_choker(bot, query):
     if not movies:
         return await query.answer(f"😢 Hey, {query.from_user.first_name}! You are clicking on an old button which is expired.🙂", show_alert=True)
     movie = movies[(int(movie_))]
-    await query.answer('Checking Your Request....')
+    await query.answer('Checking Your Request 😌😌....')
     k = await manual_filters(bot, query.message, text=movie)
     if k == False:
         files, offset, total_results = await get_search_results(movie, offset=0, filter=True)
@@ -135,7 +135,7 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit('This Movie or Series Not Found In DataBase. Theater Print Not Available Here..!')
+            k = await query.message.edit(f'<b>😌 Hey, {query.from_user.first_name}!</b>\n\n<b>This Movie/Series Not Found In DataBase 😑</b>\n\n<b>Theater Print Not Available Here..! 😑</b>\n<b>Check if the DVD is out ... ??⁇😊</b>')
             await asyncio.sleep(35)
             await k.delete()
 
@@ -751,20 +751,20 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>\n\n<b> 👇👇👇👇👇👇👇👇👇 </b>"
+        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>"
     if imdb and imdb.get('poster'):
         try:
-            await message.reply_photo(photo=imdb.get('poster'), caption=cap[:1024],
+            await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap[:1024],
                                       reply_markup=InlineKeyboardMarkup(btn))
         except (MediaEmpty, PhotoInvalidDimensions, WebpageMediaEmpty):
-            pic = imdb.get('poster')
-            poster = pic.replace('.jpg', "._V1_UX360.jpg")
+            pic = "https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg"
+            poster = pic.replace("https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg")
             await message.reply_photo(photo=poster, caption=cap[:1024], reply_markup=InlineKeyboardMarkup(btn))
         except Exception as e:
             logger.exception(e)
-            await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+            await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
     else:
-        await message.reply_text(cap, reply_markup=InlineKeyboardMarkup(btn))
+        await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap, reply_markup=InlineKeyboardMarkup(btn))
     if spoll:
         await msg.message.delete()
 
@@ -774,13 +774,24 @@ async def advantage_spell_chok(msg):
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
         "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
     query = query.strip() + " movie"
+    search = msg.text
     g_s = await search_gagala(query)
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        k = await msg.reply("I couldn't find any Movie or Series in that name.")
-        await asyncio.sleep(8)
-        await k.delete()
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>",
+        reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+                        ],
+                        [
+                            InlineKeyboardButton("🔍 Search On Google 🔎", url=f"https://google.com/search?q={search}")
+                        ]
+                    ]
+                ),
+                parse_mode=enums.ParseMode.HTML
+            )
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -807,9 +818,19 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
     if not movielist:
-        k = await msg.reply("I couldn't find anything related to that. Check your spelling")
-        await asyncio.sleep(8)
-        await k.delete()
+        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>",
+        reply_markup=InlineKeyboardMarkup(
+                    [
+                        [
+                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
+                        ],
+                        [
+                            InlineKeyboardButton("🔍 Search On Google 🔎", url=f"https://google.com/search?q={search}")
+                        ]
+                    ]
+                ),
+                parse_mode=enums.ParseMode.HTML
+            )
         return
     SPELL_CHECK[msg.id] = movielist
     btn = [[
@@ -819,8 +840,10 @@ async def advantage_spell_chok(msg):
         )
     ] for k, movie in enumerate(movielist)]
     btn.append([InlineKeyboardButton(text="🚶‍♂️ Close 🚶‍♂️", callback_data=f'spolling#{user}#close_spellcheck')])
-    await msg.reply("I couldn't find anything related to that\nDid you mean any one of these?",
-                    reply_markup=InlineKeyboardMarkup(btn))
+    m = await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>I couldn't find anything related to that</b>\n<b>Did you mean any one of these?</b>\n🤔👇👇👇👇🤔",
+                        reply_markup=InlineKeyboardMarkup(btn))
+    await asyncio.sleep(35)
+    await m.delete()
 
 
 async def manual_filters(client, message, text=False):
