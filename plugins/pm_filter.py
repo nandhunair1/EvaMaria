@@ -29,20 +29,6 @@ logger.setLevel(logging.ERROR)
 
 BUTTONS = {}
 SPELL_CHECK = {}
-RATING = ["(5.1/10)", "(6.2/10)", "(7.3/10)", "(8.4/10)", "(9.5/10)", "(7.6/10)", "(6.9/10)", "(6.6/10)", "(7.9/10)", "(5.4/10)", "(5.8/10)", "(8.7/10)", "(7.1/10)", "(9.1/10)", "(8.5/10)",]
-GENRES = ["fun, fact",
-         "Thriller, Comedy",
-         "Drama, Comedy",
-         "Family, Drama",
-         "Action, Adventure",
-         "Film Noir",
-         "Documentary",
-         "Horror, Thriller",
-         "Action, Sci-Fi",
-         "Adventure, Fantasy",
-         "Crime, Drama, Mystery",
-         "Crime, Mystery, Thriller",
-         "Biography, Drama"]
 
 
 @Client.on_message(filters.group & filters.text & filters.incoming)
@@ -766,7 +752,7 @@ async def auto_filter(client, msg, spoll=False):
             **locals()
         )
     else:
-        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🌟 IMDb Rating :- {random.choice(RATING)}</b>\n\n<b>🎭 Genre :- {random.choice(GENRES)}</b>\n\n<b>💿 Quality :- HDRip</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>"
+        cap = f"<b>🎬 Title :- {search}</b>\n\n<b>🗣️ Requested By :- {message.from_user.mention}</b>\n\n<b>©️ {message.chat.title} </b>"
     if imdb and imdb.get('poster'):
         try:
             await message.reply_photo(photo="https://te.legra.ph/file/3f82be401da3c23a5fa6c.jpg", caption=cap[:1024],
