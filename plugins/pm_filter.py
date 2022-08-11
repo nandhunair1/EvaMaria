@@ -135,7 +135,7 @@ async def advantage_spoll_choker(bot, query):
             k = (movie, files, offset, total_results)
             await auto_filter(bot, query, k)
         else:
-            k = await query.message.edit('😌 Hey ! This Movie/Series Not Found In DataBase. Theater Print Not Available Here..! 😑 Check if the DVD is out ... ??⁇😊')
+            k = await query.message.edit('This Movie or Series Not Found In DataBase. Theater Print Not Available Here..!')
             await asyncio.sleep(35)
             await k.delete()
 
@@ -774,24 +774,13 @@ async def advantage_spell_chok(msg):
         r"\b(pl(i|e)*?(s|z+|ease|se|ese|(e+)s(e)?)|((send|snd|giv(e)?|gib)(\sme)?)|movie(s)?|new|latest|br((o|u)h?)*|^h(e|a)?(l)*(o)*|mal(ayalam)?|t(h)?amil|file|that|find|und(o)*|kit(t(i|y)?)?o(w)?|thar(u)?(o)*w?|kittum(o)*|aya(k)*(um(o)*)?|full\smovie|any(one)|with\ssubtitle(s)?)",
         "", msg.text, flags=re.IGNORECASE)  # plis contribute some common words
     query = query.strip() + " movie"
-    search = msg.text
     g_s = await search_gagala(query)
     g_s += await search_gagala(msg.text)
     gs_parsed = []
     if not g_s:
-        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺</b>\n\n<b>No Movie/Series Related to the Given Word Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>",
-        reply_markup=InlineKeyboardMarkup(
-                    [
-                        [
-                            InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
-                        ],
-                        [
-                            InlineKeyboardButton("🔍 Search On Google 🔎", url=f"https://google.com/search?q={search}")
-                        ]
-                    ]
-                ),
-                parse_mode="markdown"
-            )
+        k = await msg.reply("Sorry !.. 😢 No Movie/Series Related to the Given Word Was Found 🥺. Please Go to Google and Confirm the Correct Spelling 🙏")
+        await asyncio.sleep(8)
+        await k.delete()
         return
     regex = re.compile(r".*(imdb|wikipedia).*", re.IGNORECASE)  # look for imdb / wiki results
     gs = list(filter(regex.match, g_s))
@@ -818,17 +807,9 @@ async def advantage_spell_chok(msg):
     movielist += [(re.sub(r'(\-|\(|\)|_)', '', i, flags=re.IGNORECASE)).strip() for i in gs_parsed]
     movielist = list(dict.fromkeys(movielist))  # removing duplicates
     if not movielist:
-        hmm = InlineKeyboardMarkup(
-        [
-            [
-                 InlineKeyboardButton("📃 MUST READ | Click Here 📃", url="https://t.me/vayichitt_poyamathii")
-            ],
-            [
-                 InlineKeyboardButton("🕵️‍♂️ Search On Google 🕵️‍♂️", url=f"https://google.com/search?q={search}")
-            ]
-        ]
-    )
-        await msg.reply(f"<b>Sorry, {msg.from_user.mention}!.. 🥺 Your word</b>\n\n<b>No Movie/Series Related to the Given Word {search} Was Found 🥺</b>\n\n<b>Please Go to Google and Confirm the Correct Spelling 🙏</b>\n\n<b>Please Click MUST READ Button Below..!!</b>", reply_markup=hmm)
+        k = await msg.reply("Sorry !.. 😢 No Movie/Series Related to the Given Word Was Found 🥺. Please Go to Google and Confirm the Correct Spelling 🙏")
+        await asyncio.sleep(8)
+        await k.delete()
         return
     SPELL_CHECK[msg.id] = movielist
     btn = [[
