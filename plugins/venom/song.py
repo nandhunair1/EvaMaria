@@ -27,13 +27,13 @@ def time_to_seconds(time):
 
 ## Commands --------------------------------
 
-@Client.on_message(filters.command(["song", "sf"]))
+@Client.on_message(filters.command(['song']))
 def a(client, message):
     query = ''
     for i in message.command[1:]:
         query += ' ' + str(i)
     print(query)
-    m = message.reply('`𝙵𝚒𝚗𝚍𝚒𝚗𝚐 𝚢𝚘𝚞𝚛 𝚜𝚘𝚗𝚐`')
+    m = message.reply('`Searching... Please Wait...`')
     ydl_opts = {"format": "bestaudio[ext=m4a]"}
     try:
         results = []
