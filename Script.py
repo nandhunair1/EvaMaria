@@ -98,13 +98,13 @@ Song Download Module, For Those Who Love Music
 - Works in bot pm
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz_group'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
-    VIDEO_TXT ="""Help for Download any videos in YT.
+    VIDEO_TXT ="""<b>Help for Download any videos in YT</b>.
 • 𝘜𝘴𝘢𝘨𝘦
 𝘠𝘰𝘶 𝘊𝘢𝘯 𝘋𝘰𝘸𝘯𝘭𝘰𝘢𝘥 𝘈𝘯𝘺 𝘝𝘪𝘥𝘦𝘰 𝘍𝘳𝘰𝘮 𝘠𝘰𝘶𝘵𝘶𝘣𝘦
 𝙃𝙤𝙬 𝙏𝙤 𝙐𝙨𝙚
-• 𝘛𝘺𝘱𝘦 /video or /mp4 𝘈𝘯𝘥 (𝘝𝘪𝘥𝘦𝘰 Link)
+• 𝘛𝘺𝘱𝘦 /video or /mp4 𝘈𝘯𝘥 (yt Link)
 • 𝘌𝘹𝘢𝘮𝘱𝘭𝘦:
-/𝘮𝘱4 https://youtu.be/Your Link
+/𝘮𝘱4 yt Link
 
 ©️ MᴀɪɴᴛᴀɪɴᴇD Bʏ : <a href='https://t.me/tvseriezzz_group'>♠️ 𝑨𝒍𝒍 𝑰𝒏 𝑶𝒏𝒆 𝑮𝒓𝒐𝒖𝒑 🎬</a>"""
     AUTOFILTER_TXT = """Help: <b>Auto Filter</b>
