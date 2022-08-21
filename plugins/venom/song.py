@@ -8,7 +8,7 @@ import time
 import aiofiles
 import aiohttp
 import wget
-from pyrogram import Client, filters
+from pyrogram import Client, filters, enums
 from pyrogram.errors import FloodWait, MessageNotModified
 from pyrogram.types import Message
 from youtubesearchpython import SearchVideos
@@ -58,7 +58,7 @@ def a(client, message):
             #     return
 
             performer = f"[@tvseriezzz_update]"
-            thumb_name = f'thumb{message.message_id}.jpg'
+            thumb_name = f'thumb{message.id}.jpg'
             thumb = requests.get(thumbnail, allow_redirects=True)
             open(thumb_name, 'wb').write(thumb.content)
 
@@ -83,7 +83,7 @@ def a(client, message):
         for i in range(len(dur_arr)-1, -1, -1):
             dur += (int(dur_arr[i]) * secmul)
             secmul *= 60
-        message.reply_audio(audio_file, caption=rep, parse_mode='HTML',quote=False, title=title, duration=dur, performer=performer, thumb=thumb_name, reply_to_message_id=message.message_id)
+        message.reply_audio(audio_file, caption=rep, parse_mode=enums.ParseMode.HTML,quote=False, title=title, duration=dur, performer=performer, thumb=thumb_name, reply_to_message_id=message.id)
         m.delete()
     except Exception as e:
         m.edit('**𝐀𝐧 𝐄𝐫𝐫𝐨𝐫 𝐎𝐜𝐜𝐮𝐫𝐞𝐝. 𝐏𝐥𝐞𝐚𝐬𝐞 𝐑𝐞𝐩𝐨𝐫𝐭 𝐓𝐡𝐢𝐬 𝐓𝐨 @Sflix2kchats!!**')
@@ -290,7 +290,7 @@ async def vsong(client, message: Message):
         caption=capy,
         supports_streaming=True,
         progress=progress,
-        reply_to_message_id=message.message_id,
+        reply_to_message_id=message.id,
         progress_args=(
             pablo,
             c_time,
