@@ -455,11 +455,13 @@ async def cb_handler(client: Client, query: CallbackQuery):
             InlineKeyboardButton('👮‍♂️ Admin', callback_data='admin'), 
             InlineKeyboardButton('🔖 Ban', callback_data='bn')
         ], [
+            InlineKeyboardButton('Sᴏɴɢ  🎶', callback_data='songs'),
             InlineKeyboardButton('🗓 Info', callback_data='extra'), 
             InlineKeyboardButton('🏷 Filter', callback_data='filter')
         ], [
             InlineKeyboardButton('⛓️ Connection', callback_data='coct'),
-            InlineKeyboardButton('🔮 Status', callback_data='stats')
+            InlineKeyboardButton('🔮 Status', callback_data='stats'),
+            InlineKeyboardButton("Vɪᴅᴇᴏ 📲", callback_data='video')
         ], [
             InlineKeyboardButton('🏠 Home', callback_data='start'),
             InlineKeyboardButton('🔐 Close', callback_data='close_data')
@@ -576,6 +578,26 @@ async def cb_handler(client: Client, query: CallbackQuery):
         reply_markup = InlineKeyboardMarkup(buttons)
         await query.message.edit_text(
             text=script.CONNECTION_TXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    elif query.data == "video":
+        buttons = [[
+            InlineKeyboardButton('👩‍🦯 Back', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.VIDEO_TXT,
+            reply_markup=reply_markup,
+            parse_mode=enums.ParseMode.HTML
+        )
+    elif query.data == "songs":
+        buttons = [[
+            InlineKeyboardButton('👩‍🦯 Back', callback_data='help')
+        ]]
+        reply_markup = InlineKeyboardMarkup(buttons)
+        await query.message.edit_text(
+            text=script.SONG_TXT,
             reply_markup=reply_markup,
             parse_mode=enums.ParseMode.HTML
         )
